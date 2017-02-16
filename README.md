@@ -27,5 +27,5 @@
 
 #### Origen del nombre
 * **python-**: Fácil, esta escrito en python
-* **zionspar**: Es un pequeño guiño al jugador de League of Legends [ZionSpartan](https://en.wikipedia.org/wiki/Darshan_(League_of_Legends_player)
+* **zionspar**: Es un pequeño guiño al jugador de League of Legends [ZionSpartan](https://en.wikipedia.org/wiki/Darshan_(League_of_Legends_player))
 * **bot**: Y bot, pues...porque es un bot.
