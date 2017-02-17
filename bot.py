@@ -54,7 +54,7 @@ def command_start(m):
     if not str(cid) in USERS:
         bot.send_message( cid, "Permiso denegado")
     else:
-        bot.send_message( cid, "Permiso concedido")
+        bot.send_message( cid, "Permiso concedido. ¡¡Me cago en Zionsparbot!!")
 
 @bot.message_handler(commands=['windows']) # comando '/windows'
 def command_windows(m): # Definimos la función
@@ -64,6 +64,14 @@ def command_windows(m): # Definimos la función
         bot.send_message( cid, "Permiso denegado, aunque igualmente Windows apesta")
     else:
         bot.send_message( cid, 'Windows apesta')
+
+# Comando redirige al respositorio del propio bot
+@bot.message_handler(commands=['repo'])
+def command_repo(m):
+    markup = types.InlineKeyboardMarkup()
+    itembtnrepo = types.InlineKeyboardButton('Pulsar aqui!', url='https://github.com/andoniaf/python-zionsparbot')
+    markup.row(itembtnrepo)
+    bot.send_message(m.chat.id, '\U000021b3 Github repo:', reply_markup=markup)
 #########################################
 # Con esto, le decimos al bot que siga funcionando incluso si encuentra
 #   algún fallo.
