@@ -6,6 +6,7 @@
 ### Comandos
 * **/helloworld**: Saluda al mundo
 * **/windows**: Responde sinceramente su humilde opinión como Bot acerca de este SO.
+* **/repo**: Enlace al repositorio
 
 
 
