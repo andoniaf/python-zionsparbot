@@ -6,6 +6,7 @@ import telebot
 
 from telebot import types # Tipos para la API del bot.
 import time # Librería para hacer que el programa que controla el bot no se acabe.
+from modules.uptime import uptime_string
 # Importamos el TOKEN y USERS desde settings
 from settings import TOKEN
 from settings import USERS
@@ -13,8 +14,11 @@ from settings import LOGDIR
 from settings import LOGFILE
 
 bot = telebot.TeleBot(TOKEN) # Creamos el objeto del bot.
-
 print("Bot iniciado y listo para servir:")
+############ VARS #######################
+start_time = time.time()
+last_error_time = None
+#########################################
 ############ LISTENER ###################
 # Con esto, estamos definiendo una función llamada 'listener', que recibe como
 #   parámetro un dato llamado 'messages'.
@@ -39,6 +43,7 @@ def listener(messages):
 bot.set_update_listener(listener)
 #########################################
 ############ FUNCIONES ##################
+##### Comandos publicos #####
 ## Funciona basica de testeo
 @bot.message_handler(commands=['helloworld']) # comando '/helloworld'
 def command_helloworld(m): # Definimos la función
@@ -54,7 +59,7 @@ def command_start(m):
     if not str(cid) in USERS:
         bot.send_message( cid, "Permiso denegado")
     else:
-        bot.send_message( cid, "Permiso concedido. ¡¡Me cago en Zionsparbot!!")
+        bot.send_message( cid, "Permiso concedido")
 
 @bot.message_handler(commands=['windows']) # comando '/windows'
 def command_windows(m): # Definimos la función
@@ -65,13 +70,24 @@ def command_windows(m): # Definimos la función
     else:
         bot.send_message( cid, 'Windows apesta')
 
-# Comando redirige al respositorio del propio bot
-@bot.message_handler(commands=['repo'])
+# Comando que muestra enlace al blog
+@bot.message_handler(commands=['blog'])
 def command_repo(m):
     markup = types.InlineKeyboardMarkup()
-    itembtnrepo = types.InlineKeyboardButton('Pulsar aqui!', url='https://github.com/andoniaf/python-zionsparbot')
+    itembtnrepo = types.InlineKeyboardButton('Pulsar aqui!', url='https://blogde-andoniaf.rhcloud.com/')
     markup.row(itembtnrepo)
-    bot.send_message(m.chat.id, '\U000021b3 Github repo:', reply_markup=markup)
+    bot.send_message(m.chat.id, '\U000021b3 Blog Nº13:', reply_markup=markup)
+
+# Muestra el uptime del servidor
+@bot.message_handler(commands=['uptime'])
+def command_uptime(m):
+    cid = m.chat.id
+    bot.send_chat_action(cid, "typing")
+    message = uptime_string(start_time, last_error_time)
+    bot.send_message(cid, message)
+
+##### Comandos reservados #####
+
 #########################################
 # Con esto, le decimos al bot que siga funcionando incluso si encuentra
 #   algún fallo.

@@ -7,7 +7,7 @@
 * **/helloworld**: Saluda al mundo
 * **/windows**: Responde sinceramente su humilde opinión como Bot acerca de este SO.
 * **/repo**: Enlace al repositorio
-
+* **/uptime**: Muestra datos sobre el tiempo en funcionamiento del bot
 
 
 
