@@ -8,7 +8,7 @@
 * **/windows**: Responde sinceramente su humilde opinión como Bot acerca de este SO.
 * **/repo**: Enlace al repositorio en Github
 * **/uptime**: Muestra datos sobre el tiempo en funcionamiento del bot
-
+* **/logsize**: Muestra el tamaño que ocupan los logs del bot
 
 
 
