@@ -40,3 +40,10 @@ def uptime_string(startup_time_in_seconds, last_error_time):
         string += "\n\U0001F480 " + last_error + " without casualties"
 
     return string
+
+# Funcion para comprobar el espacio consumido por los logs
+## En proceso de desarrollo##
+def logs_size(path):
+    # Mensaje = logs_size_str
+    logs_size_str = (subprocess.getoutput("du -hac -d 1"+path+"| egrep 'log|total'"))+" carpeta Bot"
+    return logs_size_str

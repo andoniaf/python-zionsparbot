@@ -3,15 +3,16 @@
 
 # Librerías
 import telebot
-
 from telebot import types # Tipos para la API del bot.
 import time # Librería para hacer que el programa que controla el bot no se acabe.
 from modules.uptime import uptime_string
+from modules.uptime import logs_size
 # Importamos el TOKEN y USERS desde settings
 from settings import TOKEN
 from settings import USERS
 from settings import LOGDIR
 from settings import LOGFILE
+from settings import path
 
 bot = telebot.TeleBot(TOKEN) # Creamos el objeto del bot.
 print("Bot iniciado y listo para servir:")
@@ -51,7 +52,7 @@ def command_helloworld(m): # Definimos la función
     # funcion 'send_message()' del bot: enviamos al ID de chat guardado el texto indicado
     bot.send_message( cid, 'Hello World')
 
-## Funcion de prueba para controlar que usuarios pueden usar los comandos BOT
+## Funcion de prueba para testear que usuarios pueden usar los comandos BOT
 @bot.message_handler(commands=['start'])
 def command_start(m):
     cid = m.chat.id
@@ -61,6 +62,7 @@ def command_start(m):
     else:
         bot.send_message( cid, "Permiso concedido")
 
+# Funcion simple que duelve un str en respuesta a un comando
 @bot.message_handler(commands=['windows']) # comando '/windows'
 def command_windows(m): # Definimos la función
     cid = m.chat.id # Guardamos el ID de la conversación para poder responder.
@@ -70,13 +72,13 @@ def command_windows(m): # Definimos la función
     else:
         bot.send_message( cid, 'Windows apesta')
 
-# Comando que muestra enlace al blog
-@bot.message_handler(commands=['blog'])
+# Comando que redirige al respositorio del propio bot
+@bot.message_handler(commands=['repo'])
 def command_repo(m):
     markup = types.InlineKeyboardMarkup()
-    itembtnrepo = types.InlineKeyboardButton('Pulsar aqui!', url='https://blogde-andoniaf.rhcloud.com/')
+    itembtnrepo = types.InlineKeyboardButton('Pulsar aqui!', url='https://github.com/andoniaf/python-zionsparbot')
     markup.row(itembtnrepo)
-    bot.send_message(m.chat.id, '\U000021b3 Blog Nº13:', reply_markup=markup)
+    bot.send_message(m.chat.id, '\U000021b3 Github repo:', reply_markup=markup)
 
 # Muestra el uptime del servidor
 @bot.message_handler(commands=['uptime'])
@@ -87,7 +89,16 @@ def command_uptime(m):
     bot.send_message(cid, message)
 
 ##### Comandos reservados #####
-
+# Muestra el tamaño de los logs del bot (en proceso)
+@bot.message_handler(commands=['logsize'])
+def command_logsize(m):
+    cid = m.chat.id
+    if not str(cid) in USERS:
+        bot.send_message( cid, "Permiso denegado")
+    else:
+        bot.send_chat_action(cid, "typing")
+        message = logs_size(path)
+        bot.send_message(cid, message)
 #########################################
 # Con esto, le decimos al bot que siga funcionando incluso si encuentra
 #   algún fallo.
