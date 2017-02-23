@@ -39,9 +39,8 @@ def listener(messages):
             #mensaje = update.mensaje.text.encode('utf-8')
             print(mensaje) # Imprimimos el mensaje tambien en la terminal
 
-# Así, le decimos al bot que utilice como función escuchadora nuestra
-#   función 'listener' declarada arriba.
-bot.set_update_listener(listener)
+# Ejecutamos funcion que "escucha" los mensajes
+bot.set_update_listener(listener)e
 #########################################
 ############ FUNCIONES ##################
 ##### Comandos publicos #####
