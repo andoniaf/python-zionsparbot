@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import sys
-# https://docs.python.org/3.6/library/urllib.html 
+# https://docs.python.org/3.6/library/urllib.html
 import urllib.request  # for parsing URLs
 import urllib.parse    # for opening and reading URLs
 from bs4 import BeautifulSoup as bs
@@ -22,21 +22,14 @@ def get_parada(numParada,linea='',adaptados=0,user='Anonimo',idioma='es'):
     data = urllib.request.urlopen(req).read().decode('utf-8')
     return(data)
 
-
-
-## Funciones temporales debugging
-def emt_html(numParada):
-    # Datos que provienen de la funcion get_parada
-    raw_data = get_parada(numParada)
-    soup = bs(raw_data, "html.parser")
-    return(soup.prettify())
-
+# Funcion para crear el objeto "soup"
 def soup_html(numParada):
     # Datos que provienen de la funcion get_parada
     raw_data = get_parada(numParada)
     soup = bs(raw_data, "html.parser")
     return(soup)
 
+# Funcion que devuelve los proximo buses de forma que se pueda enviar por TG
 def prime_buses(numParada):
     # Objeto que proviene de la funcion soup_html
     data = soup_html(numParada)
@@ -48,8 +41,7 @@ def prime_buses(numParada):
     span_tiempos = data.find_all('span', {'class': 'llegadaHome'})
     # Los img donde aparece la linea
     imgElem = data.select('img')
-    buses = ""
-
+    buses = ''
     # Bucle para mostrar linea y tiempo
     ## Pdte de revisar problemas de encoding
     ## Pdte de añadir que si sale "Temporalmente fuera de servicio automaticamente meta F5"
@@ -61,4 +53,6 @@ def prime_buses(numParada):
         show = show.replace("b'",": ")
         #print(linea, show)
         buses += linea+show+"\n"
+    if buses == '':
+        buses += "No quedan buses..."
     return buses
