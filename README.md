@@ -5,11 +5,11 @@
 
 ### Comandos
 * **/helloworld**: Saluda al mundo
-* **/windows**: Responde sinceramente su humilde opinión como Bot acerca de este SO.
+* **/emt** $parada: Indica los próximos buses en esa parada. (EMT Valencia)
 * **/repo**: Enlace al repositorio en Github
 * **/uptime**: Muestra datos sobre el tiempo en funcionamiento del bot
 * **/logsize**: Muestra el tamaño que ocupan los logs del bot
-
+* **/windows**: Responde sinceramente su humilde opinión como Bot acerca de este SO.
 
 
 

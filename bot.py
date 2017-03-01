@@ -13,6 +13,8 @@ from settings import USERS
 from settings import LOGDIR
 from settings import LOGFILE
 from settings import path
+#Modulo EMT VLC
+from modules.emtVlc import prime_buses
 
 bot = telebot.TeleBot(TOKEN) # Creamos el objeto del bot.
 print("Bot iniciado y listo para servir:")
@@ -40,7 +42,7 @@ def listener(messages):
             print(mensaje) # Imprimimos el mensaje tambien en la terminal
 
 # Ejecutamos funcion que "escucha" los mensajes
-bot.set_update_listener(listener)e
+bot.set_update_listener(listener)
 #########################################
 ############ FUNCIONES ##################
 ##### Comandos publicos #####
@@ -85,6 +87,14 @@ def command_uptime(m):
     cid = m.chat.id
     bot.send_chat_action(cid, "typing")
     message = uptime_string(start_time, last_error_time)
+    bot.send_message(cid, message)
+
+@bot.message_handler(commands=['emt'])
+def command_emt(m):
+    cid = m.chat.id
+    bot.send_chat_action(cid, "typing")
+    parada = m.text.strip('/emt ')
+    message = prime_buses(parada)
     bot.send_message(cid, message)
 
 ##### Comandos reservados #####
