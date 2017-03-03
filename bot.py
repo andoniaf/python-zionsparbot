@@ -4,6 +4,7 @@
 # Librerías
 import telebot
 from telebot import types # Tipos para la API del bot.
+from datetime import datetime
 import time # Librería para hacer que el programa que controla el bot no se acabe.
 from modules.uptime import uptime_string
 from modules.uptime import logs_size
@@ -29,9 +30,10 @@ def listener(messages):
     for m in messages: # Por cada dato 'm' en el dato 'messages'
         if m.content_type == 'text': # Filtramos mensajes que sean tipo texto.
             cid = m.chat.id # Almacenaremos el ID de la conversación.
+            now = datetime.now().strftime("%Y-%m-%d %H:%M")
             if cid > 0:
                 # Si 'cid' es positivo, usaremos 'm.chat.first_name' para el nombre.
-                mensaje = str(m.chat.first_name) + " [" + str(cid) + "]: " + m.text
+                mensaje = now + ": " + str(m.chat.first_name) + " [" + str(cid) + "]: " + m.text
             else:
                 # Si 'cid' es negativo, usaremos 'm.from_user.first_name' para el nombre.
                 mensaje = str(m.from_user.first_name) + "[" + str(cid) + "]: " + m.text
