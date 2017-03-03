@@ -33,10 +33,10 @@ def listener(messages):
             now = datetime.now().strftime("%Y-%m-%d %H:%M")
             if cid > 0:
                 # Si 'cid' es positivo, usaremos 'm.chat.first_name' para el nombre.
-                mensaje = now + ": " + str(m.chat.first_name) + " [" + str(cid) + "]: " + m.text
+                mensaje = "[" + now + "]: " + str(m.chat.first_name) + "(" + str(cid) + "): " + m.text
             else:
                 # Si 'cid' es negativo, usaremos 'm.from_user.first_name' para el nombre.
-                mensaje = str(m.from_user.first_name) + "[" + str(cid) + "]: " + m.text
+                mensaje = "[" + now + "]: " + str(m.from_user.first_name) + "(" + str(cid) + "): " + m.text
             f = open( LOGDIR + LOGFILE, 'a') # Abrimos nuestro fichero log en modo 'Añadir'.
             f.write(mensaje + "\n") # Escribimos la linea de log en el fichero.
             f.close() # Cerramos el fichero para que se guarde.
