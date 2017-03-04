@@ -42,6 +42,7 @@ def prime_buses(numParada):
     # Los img donde aparece la linea
     imgElem = data.select('img')
     buses = ''
+    linea = ''
     # Bucle para mostrar linea y tiempo
     ## Pdte de revisar problemas de encoding
     ## Pdte de añadir que si sale "Temporalmente fuera de servicio automaticamente meta F5"
@@ -57,5 +58,5 @@ def prime_buses(numParada):
     if linea == 'None':
         buses = "Temporalmente fuera de servicio, pruebe de nuevo."
     if buses == '':
-        buses += "No quedan buses..."
+        buses += "No quedan buses... O la parada introducida no existe."
     return buses

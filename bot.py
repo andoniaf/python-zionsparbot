@@ -96,7 +96,13 @@ def command_emt(m):
     cid = m.chat.id
     bot.send_chat_action(cid, "typing")
     parada = m.text.strip('/emt ')
-    message = prime_buses(parada)
+    # Comprobar si se ha introducido una parada "valida"
+    if parada == '':
+        message = "No has introducido la parada!!"
+    elif parada.isdigit() != True:
+        message = "No has introducido un numero de parada valido."
+    else:
+        message = prime_buses(parada)
     bot.send_message(cid, message)
 
 ##### Comandos reservados #####
