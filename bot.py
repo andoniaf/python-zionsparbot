@@ -3,6 +3,7 @@
 
 # Librerías
 import telebot
+import os
 from telebot import types # Tipos para la API del bot.
 from datetime import datetime
 import time # Librería para hacer que el programa que controla el bot no se acabe.
@@ -106,6 +107,21 @@ def command_emt(m):
     bot.send_message(cid, message)
 
 ##### Comandos reservados #####
+##### Comandos reservados #####
+@bot.message_handler(commands=['run'])
+def command_run(m):
+    cid = m.chat.id
+    if not str(cid) in ADMIN:
+        bot.send_message( cid, "Permiso denegado")
+    else:
+        comm = m.text.strip('/run ')
+        bot.send_message(cid, "Running: " + comm)
+        bot.send_chat_action(cid, 'typing')
+        time.sleep(2)
+        f = os.popen(comm)
+        result = f.read()
+        bot.send_message(cid, "```\n"+result+"\n```", parse_mode="Markdown")
+
 # Muestra el tamaño de los logs del bot (en proceso)
 @bot.message_handler(commands=['logsize'])
 def command_logsize(m):

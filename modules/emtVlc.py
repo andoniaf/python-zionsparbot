@@ -44,17 +44,14 @@ def prime_buses(numParada):
     buses = ''
     linea = ''
     # Bucle para mostrar linea y tiempo
-    ## Pdte de revisar problemas de encoding
     ## Pdte de añadir que si sale "Temporalmente fuera de servicio automaticamente meta F5"
     for span, img in zip(span_tiempos, imgElem):
         linea = img.get('title')
         show = span.getText(strip=True)
-        show = show.encode('utf-8')
         linea = str(linea)
         show = str(show)
         show = show.replace("b'",": ")
         #print(linea, show)
-        buses += linea + show + "\n"
     if linea == 'None':
         buses = "Temporalmente fuera de servicio, pruebe de nuevo."
     if buses == '':
